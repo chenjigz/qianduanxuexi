@@ -1,0 +1,21 @@
+h2{
+    text-align: center;
+    color: blue ;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-shadow: 1px 1px 2px blue;
+}
+h3{
+    margin-left: 20px;
+    font-style: normal;
+    font-weight: bold;
+}
+h4{
+    margin-left: 30px;
+    color:red;
+    text-decoration: aliceblue;
+}
+p{
+
+    text-indent:2em;
+    color: chartreuse;
+}
