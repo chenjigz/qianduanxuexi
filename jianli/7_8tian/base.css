@@ -1,0 +1,142 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+header {
+    width: 100%;
+    height: 80px;
+    background-color: #333333;
+}
+header .head {
+    width: 960px;
+    height: 100%;
+    margin: 0 auto;
+}
+.head .logo {
+    float: left;
+    font-size: 24px;
+    line-height: 80px;
+    color: #ffffff;
+}
+.head .head_nav {
+    float: right;
+    width: 240px;
+    margin-top: 5px;
+}
+.head .head_nav li {
+    float: right;
+    list-style-type: none;
+    margin-left: 4px;
+}
+.head li a {
+    font-size: 12px;
+    color: #fff;
+}
+.head li a:hover {
+    color: #66bb33;
+}
+.banner {
+    width: 100%;
+    height: 300px;
+    background-color: #66bb33;
+}
+.banner .ban_nav {
+    width: 960px;
+    height: 100%;
+    margin: 0 auto;
+    position: relative;
+}
+.banner ul {
+    width: 160px;
+    height: 50px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+
+}
+.banner ul li {
+    float: left;
+    list-style-type: none;
+    margin: 10px 4px;
+}
+.banner li a {
+    display: inline-block;
+    width: 28px;
+    height: 34px;
+    line-height: 34px;
+    text-align: center;
+    text-decoration: none;
+    background-color: #b2dd99;
+    border: 1px solid #14250a;
+}
+.banner li a:hover {
+    height: 50px;
+    background-color: #e0f1d6;
+    color: black;
+}
+.nav {
+    width: 100%;
+    height: 70px;
+    background-color: #ffffff;
+    border-bottom: 2px solid #dddddd;
+}
+.nav .nav_left {
+    width: 960px;
+    height: 100%;
+    margin: 0 auto;
+    position: relative;
+}
+.nav .nav_left ul {
+    width: 340px;
+    height: 50px;
+    position: absolute;
+    left: 6px;
+    bottom: 0px;
+}
+.nav .nav_left li {
+    float: left;
+    list-style-type: none;
+}
+.nav .nav_left li a {
+    display: inline-block;
+    width: 108px;
+    height: 49px;
+    line-height: 50px;
+    text-align: center;
+    text-decoration: none;
+    color: #000000;
+    background-color: #eeeeee;
+    border: 2px solid #cccccc;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+.nav .nav_left li a:hover {
+    background-color: #ffffff;
+    border-bottom: none;
+    height: 50px;
+}
+.content {
+    width: 100%;
+}
+.content .neirong {
+    width: 960px;
+    margin: 0 auto;
+    background-color: #ffffff;
+}
+.content .neirong li {
+    display: inline-block;
+    margin: 12px 6px;
+    padding: 80px;
+    font-size: 12px;
+    text-align: center;
+    line-height: 20px;
+    border: 2px solid #cccccc;
+}
+
+footer {
+    width: 100%;
+    height: 80px;
+    margin: 0 auto;
+    background-color: #666666;
+    text-align: center;
+}
