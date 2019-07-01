@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet"  text="text/css"  href="D:\qianduan\简历/jianli.css">
+    <title>简历</title>
+</head>
+<body>
+    <header>
+        <h1>简历</h1>
+    </header>
+    <div class="contanier">
+        <div class="heading">
+            <h3>姓名： <span>chengjieqqq</span></h3>
+            <h3>学校： <span>najingdedaxue</span></h3>
+            <h3>联系电话; <span>1234567890</span></h3>
+        </div>
+        <input id="greet" type="button" value="打招呼">
+        <input id="hobby" type="button" value="点开看看我的特殊爱好">
+        <p id="aihao"></p>
+        <div class="content"></div>
+        <h4>自我介绍：</h4>
+        <p>您好，我叫xx，今年23岁，来自xx，是xx大学应届毕业生，
+            专业是国际经济与贸易。从进入大学开始，我就决心以后从事外贸工作。
+             因此在四年的大学生活中，我非常认真的学习了专业知识，
+             现在对外贸业务员的工作流程有比较清楚的认识。 　　
+             另外，我最大的优势是外语好，在校期间通过了国际日语2
+             级和大学英语6级考试，可以在工作中熟练的使用日语和英语。
+             我还注重理论和实践结合，曾经利用假期去从事过销售工作，
+             锻炼了销售能力。 在为人方面，我诚实善良、开朗自信，能够吃苦。在生活中
+             ，我尊敬他人，能够和别人友好相处。现在我唯一的不足就是应届毕业，
+             还没有足够的工作经验。但我擅长学习新知识，并且对工作有高度责任感
+             ，能够全身心的为工作奉献。所以，希望您给我这个机会，
+             我有充足的信心在很短的时间内胜任这份工作，
+             成为公司未来发展的好帮手！</p>
+        <div class="jineng">
+            <ul>
+                <li><a href="#">会一些基础爬虫</a></li>
+                <li><a href="#">了解django框架搭建网站</a></li>
+                <li><a href="#">会使用redis,mysqpl,mongo数据库</a></li>
+                <li><a href="#">了解HTML，css，js</a></li>
+                </ul>
+            </div>
+    </div>
+    <footer></footer>
+    <script>
+        var flag = true;
+        document.getElementById('hobby').onclick = function(){
+            if (flag) {
+                 document.getElementById('aihao').innerHTML = '我喜欢打羽毛球，看小说，看电视';
+                 flag = false;
+            } else{
+                document.getElementById('aihao').innerHTML = '';
+                flag = true;
+            }
+           
+        }
+        document.getElementById('greet').onclick = function() {
+            window.alert('你好，我是cj');
+        }
+    </script>
+</body>
+</html>
