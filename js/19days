@@ -44,8 +44,11 @@
     function findAllHtmlSpanInOneSection(sectionId) {
         // 返回某个section下所有span中内容为HTML的span标签
         var news = document.getElementById(sectionId);
-        var ul1 = news.getElementsByTagName('span');
-        console.log(ul1);
+        for (var i = 0; i < news.length; i++){
+                if (mews[i].innerHTML === "HTML"){
+                    console.log(news[i]);
+                }
+            }
     }
 
     function getActiveLinkContent(sectionId) {
