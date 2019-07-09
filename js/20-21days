@@ -1,54 +1,131 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <meta charset="UTF-8">    
-    <title>seclect</title>
+    <meta charset="UTF-8">
+    <title>li</title>
     <style>
-        select {
-            display: none;
+        .palette {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .palette li {
+            width: 40px;
+            height: 40px;
+            border: 1px solid #000;
+            cursor: pointer;
         }
     </style>
 </head>
-<body>            
-    <label>
-        <input id="school" name="status" type="radio">
-        School
-    </label>
-    <label>
-        <input id="company" name="status" type="radio">
-        Company
-    </label>
 
-    <select id="school-select">        
-        <option>北京邮电大学</option>
-        <option>黑龙江大学</option>
-        <option>华中科技大学</option>
-    </select>
+<body>
+    <input id="name" type="text">
+    <button id="submit-btn">Submit</button>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <hr>
 
-    <select id="company-select">        
-        <option>百度</option>
-        <option>爱奇艺</option>        
-    </select>
+
+    <div>
+        <label>
+            <input id="school" name="status" type="radio">
+            School
+        </label>
+        <label>
+            <input id="company" name="status" type="radio">
+            Company
+        </label>
+
+        <select id="school-select">
+            <option>北京邮电大学</option>
+            <option>黑龙江大学</option>
+            <option>华中科技大学</option>
+        </select>
+
+        <select id="company-select">
+            <option>百度</option>
+            <option>爱奇艺</option>
+        </select>
+    </div>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <hr>
+
+    <ul class="palette">
+        <li style="background-color:crimson"></li>
+        <li style="background-color:bisque"></li>
+        <li style="background-color:blueviolet"></li>
+        <li style="background-color:coral"></li>
+        <li style="background-color:chartreuse"></li>
+        <li style="background-color:darkolivegreen"></li>
+        <li style="background-color:cyan"></li>
+        <li style="background-color:#194738"></li>
+    </ul>
+
+    <p id="p" class="color-picker"></p>
+
     <script>
+        // 代码1
+        var subBtn = document.getElementById("submit-btn");
+        let name = document.getElementById("name");
+
+        function myClick() {
+            console.log(name.value);
+        }
+        subBtn.addEventListener('click', myClick);
+
+        window.onkeydown = function (e) {
+            if (e.keyCode == 13) {
+                console.log(name.value);
+            } else if (e.keyCode == 27) {
+                name.value = '';
+            }
+        }
+        // 代码2
         var school = document.getElementById('school');
         var company = document.getElementById('company');
         var schoolSelect = document.getElementById('school-select');
-        var  companySelect = document.getElementById('company-select');
+        var companySelect = document.getElementById('company-select');
 
-        school.onclick = function() {
+        school.onclick = function () {
             if (school.checked) {
                 schoolSelect.style.display = 'block';
                 companySelect.style.display = 'none';
             }
         }
-        company.onclick = function() {
+        company.onclick = function () {
             if (company.checked) {
                 schoolSelect.style.display = 'none';
                 companySelect.style.display = 'block';
             }
         }
-    
-    
+
+
+
+
+
+        // 代码3
+        var ul = document.querySelector('.palette');
+        ul.onclick = function (e) {
+            var e = e || event;
+            var t = e.target || e.srcElement;
+            var c = t.style.backgroundColor;
+            var p = document.getElementById('p');
+            p.innerHTML = c;
+            p.style.color = c;
+        }
+
+
     </script>
 </body>
+
 </html>
