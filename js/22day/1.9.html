@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var scoreObject = {
+            "Tony": {
+                "Math": 95,
+                "English": 79,
+                "Music": 68
+            }, 
+            "Simon": {
+                "Math": 100,
+                "English": 95,
+                "Music": 98
+            }, 
+            "Annie": {
+                "Math": 54,
+                "English": 65,
+                "Music": 88
+            }
+        }
+        var arr = []
+        function trnToArr(obj) {
+            for (var key in obj) {
+                var arr1 = []
+                arr1[0] = key;
+                arr1[1] = obj[key]['Math'];
+                arr1[2] = obj[key]['English'];
+                arr1[3] = obj[key]['Math'];
+                arr.push(arr1);
+            }
+        }
+        trnToArr(scoreObject);
+        console.log(arr);
+
+
+    </script>
+</body>
+</html>

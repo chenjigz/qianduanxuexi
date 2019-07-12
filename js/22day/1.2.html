@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <label>String A:
+            <input id="radio-a" type="radio" checked="true" name="str-obj" value="a">
+        </label>
+        <textarea id="str-a"></textarea>
+        <label>String B:
+            <input id="radio-b" type="radio" name="str-obj" value="b">
+        </label>
+        <textarea id="str-b"></textarea>
+        <label>Num A：<input id="num-a" type="number" value="0"></label>
+        <label>Num B：<input id="num-b" type="number" value="1"></label>
+    </div>
+    <div>
+        <button>获取当前选中输入的内容长度</button>
+        <button>当前选中输入中的第3个字符</button>
+        <button>把两个输入框的文字连接在一起输出（concat）</button>
+        <button>输入B中的内容，在输入A的内容中第一次出现的位置（indexOf）</button>
+        <button>输入A中的内容，在输入B的内容中最后一次出现的位置（lastIndexOf）</button>
+        <button>使用slice获取选中输入框内容的部分内容，参数为num-a及num-b</button>
+        <button>当前选中输入框的行数</button>
+        <button>使用substr获取选中输入框内容的子字符串，参数为num-a及num-b</button>
+        <button>把所选输入框中的内容全部转为大写</button>
+        <button>把所选输入框中的内容全部转为小写</button>
+        <button>把所选输入框中内容的半角空格全部去除</button>
+        <button>把所选输入框中内容的a全部替换成另外一个输入框中的内容</button>
+    </div>
+    <p id="result"></p>
+
+    <script>
+     var p = document.getElementById('result');
+     var textA = document.getElementById('str-a');
+     var textB = document.getElementById('str-b');
+     var radios = document.querySelectorAll('input[type=radio]');
+     var btns = document.querySelectorAll("button");
+     var numA =  document.getElementById('num-a');
+     var numB =  document.getElementById('num-b');
+     btns[0].onclick = function() {
+        if(radios[0].checked) {
+            p.innerHTML = textA.value.length;
+        }
+        if(radios[1].checked) {
+            p.innerHTML = textB.value.length;
+        }
+     }
+     btns[1].onclick = function() {
+        if(radios[0].checked) {
+            p.innerHTML = textA.value.slice(0,3);
+        }
+        if(radios[1].checked) {
+            p.innerHTML = textB.value.slice(0,3);
+        }
+     }
+     btns[2].onclick = function() {
+         p.innerHTML = textA.value + textB.value;
+     }
+     btns[3].onclick = function() {
+         p.innerHTML = textA.value.indexOf(textB.value);
+     }
+     btns[4].onclick = function() {
+         p.innerHTML = textB.value.lastIndexOf(textA.value);
+     }
+
+     btns[5].onclick = function() {
+        if(radios[0].checked) {
+            p.innerHTML = textA.value.slice(numA.value, numB.value);
+        }
+        if(radios[1].checked) {
+            p.innerHTML = textB.value.slice(numA.value,numB.value);
+        }
+     }
+
+     btns[7].onclick = function() {
+        if(radios[0].checked) {
+            p.innerHTML = textA.value.substr(numA.value, numB.value);
+        }
+        if(radios[1].checked) {
+            p.innerHTML = textB.value.substr(numA.value,numB.value);
+        }
+     }
+     btns[8].onclick = function() {
+        if(radios[0].checked) {
+            p.innerHTML = textA.value.toUpperCase();
+        }
+        if(radios[1].checked) {
+            p.innerHTML = textB.value.toUpperCase();
+        }
+     }
+     btns[9].onclick = function() {
+        if(radios[0].checked) {
+            p.innerHTML = textA.value.toLowerCase();
+        }
+        if(radios[1].checked) {
+            p.innerHTML = textB.value.toLowerCase();
+        }
+     }    
+
+
+     btns[11].onclick = function() {
+        if(radios[0].checked) {
+            p.innerHTML = textA.value.replace('a',textB.value);
+        }
+        if(radios[1].checked) {
+            p.innerHTML = textB.value.replace('a',textA.value);
+        }
+     }
+     btns[10].onclick = function() {
+        if(radios[0].checked) {
+            var i = 0; len = textA.value.ength;
+            var str = null; 
+            for(i = 0; i < len ;i++ ) {
+                if(textA.value.charCodeAt(i) === 32 ) {
+                    continue;
+                }else {
+                    str += (textA.value)[i];
+                }
+            }
+            p.innerHTML = str;
+        }
+        if(radios[1].checked) {
+            var i = 0; len = textB.value.ength;
+            var str = null; 
+            for(i = 0; i < len ;i++ ) {
+                if(textB.value.charCodeAt(i) === 32 ) {
+                    continue;
+                }else {
+                    str += (textB.value)[i];
+                }
+            }
+            p.innerHTML = str;
+
+        }
+     }
+    </script>
+</body>
+
+</html>
