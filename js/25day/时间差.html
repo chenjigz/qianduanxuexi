@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <select id="year-select">
+
+    </select>
+
+    <select id="month-select">
+
+    </select>
+
+    <select id="day-select">
+
+    </select>
+
+    <select id="hour-select">
+
+    </select>
+
+    <select id="minite-select">
+
+    </select>
+
+    <select id="second-select">
+
+    </select>
+
+    <p id="result-wrapper">现在距离 2001年1月1日星期X HH:MM:SS 还有 X 天 X 小时 X 分 X 秒</p>
+    <!-- 使用上方的HTML结构（可以根据需要自行微调）为基础编写JavaScript代码
+当变更任何一个select选择时，更新 result-wrapper 的内容
+当所选时间早于现在时间时，文案为 现在距离 "所选时间" 已经过去 xxxx
+当所选时间晚于现在时间时，文案为 现在距离 "所选时间" 还有 xxxx
+注意当前时间经过所选时间时候的文案变化
+注意选择不同月份的时候，日期的可选范围不一样，比如1月可以选31天，11月只有30天，注意闰年
+同样，需要注意，通过优雅的函数封装，使得代码更加可读且可维护 -->
+
+
+    <script>
+        var ySelect = document.getElementById('year-select');
+        var mSelect = document.getElementById('month-select');
+        var dSelect = document.getElementById('day-select');
+        var hSelect = document.getElementById('hour-select');
+        var miSelect = document.getElementById('minite-select');
+        var sSelect = document.getElementById('second-select');
+        var p = document.getElementById('result-wrapper');
+        var i;
+        function loapDay() {
+            var year = ySelect.value;
+            var month = mSelect.value;
+            var num;
+            switch (Number(month)) {
+                case 1:
+                case 3:
+                case 5:
+                case 7:
+                case 8:
+                case 10:
+                case 12:
+                    num = 31;
+                    break;
+                case 4:
+                case 6:
+                case 9:
+                case 11:
+                    num = 30;
+                    break;
+                default:
+                    if (year % 4 == 0) {
+                        num = 29;
+                    } else {
+                        num = 28;
+                    }
+            }
+            return num;
+        }
+        function addOptions(start, end, element) {
+            for (i = start; i < end; i++) {
+                var option = document.createElement('option');
+                element.appendChild(option);
+                option.value = i;
+                option.innerText = i;
+            }
+        }
+        addOptions(2000, 2032, ySelect);
+        addOptions(1, 12, mSelect);
+        addOptions(1, loapDay(), dSelect);
+        addOptions(0, 23, hSelect);
+        addOptions(0, 59, miSelect);
+        addOptions(0, 59, sSelect);
+        function countTimeGap() {
+            var newTime = new Date();
+            var someTime = new Date();
+            someTime.setFullYear(ySelect.value);
+            someTime.setMonth(miSelect.value);
+            someTime.setDate(dSelect.value); 
+            someTime.setHours( hSelect.value);
+            someTime.setMinutes(miSelect.value);
+            someTime.setSeconds(sSelect.value);
+
+            // 计算与选中时间的时差
+            var gap = newTime.getTime() - someTime.getTime();
+            /* 计算相差的天数 */
+            var gapDay = Math.floor(Math.abs(gap) / 86400000);
+            /* 计算相差的小时 */
+            var gapHours = Math.floor((Math.abs(gap) % 86400000) / 3600000);
+            /* 计算相差分钟 */
+            var gapMinites = Math.floor(((Math.abs(gap) % 86400000) % 3600000) / 60000);
+            /* 计算相差秒数 */
+            var gapScends = Math.floor((((Math.abs(gap) % 86400000) % 3600000) % 60000) / 1000);
+            /* 判断是在今天前还是在今天后 */
+            if (gap < 0) {
+                p.innerHTML = '距离选中日期还有' + '&nbsp;&nbsp;' + gapDay + '天' + '&nbsp;' + gapHours + '小时' + '&nbsp;' + gapMinites + '分钟' + '&nbsp;' + gapScends + '秒';
+            }else {
+                p.innerHTML = '距离选中日期过去' + '&nbsp;&nbsp;' + gapDay + '天' + '&nbsp;' + gapHours + '小时' + '&nbsp;' + gapMinites + '分钟' + '&nbsp;' + gapScends + '秒';
+
+            }
+        }
+        function outTime(e) {
+            if (e.target === ySelect || e.target === mSelect) {
+                addOptions(1, loapDay(), dSelect);
+            }
+            countTimeGap();
+        }
+        document.body.onchange = outTime;
+
+
+    </script>
+</body>
+
+</html>
