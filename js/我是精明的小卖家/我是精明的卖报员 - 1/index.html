@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>精明的买报家</title>
+</head>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+    }
+
+    .wrapper {
+        margin: 10px auto;
+        width: 800px;
+    }
+</style>
+
+<body>
+    <div class="wrapper">
+        <div id="region-radio-wrapper">
+            地区选择：
+            <label><input name="region" type="checkbox" value="全选" />全选</label> <br>
+            <label><input name="region" type="checkbox" value="华南" />华南</label>
+            <label><input name="region" type="checkbox" value="华北" />华北</label>
+            <label><input name="region" type="checkbox" value="华东" />华东</label>
+        </div>
+        <div id="product-radio-wrapper">
+            商品选择：
+            <label><input name="product" type="checkbox" value="全选" />全选</label> <br>
+            <label><input name="product" type="checkbox" value="手机" />手机</label>
+            <label><input name="product" type="checkbox" value="笔记本" />笔记本</label>
+            <label><input name="product" type="checkbox" value="智能音箱" />智能音箱</label>
+        </div>
+        <div id="table-wrapper">
+        </div>
+    </div>
+    <script src="./js/data.js"></script>
+    <script src="./js/common.js"></script>
+    <script src="./js/obtainChecked.js"></script>
+    <script src="./js/obtainData.js"></script>
+    <script src="./js/table.js"></script>
+    <script src="./js/app.js"></script>
+
+    <script>
+        var regionWrapper = document.getElementById('region-radio-wrapper');
+        var productWrapper = document.getElementById('product-radio-wrapper');
+        var tableWrapper = document.getElementById('table-wrapper');
+        var regionArr = [];
+        var sortArr = []
+        var dataLen = sourceData.length
+
+        // 为checkbox设置选中属性
+        function setAttr(box) {
+            var checks = box.querySelectorAll('input');
+            for (var i = 0; i < checks.length; i++) {
+                if (checks[i].value === '全选') {
+                    checks[i].checktype = 'all';
+                } else {
+                    checks[i].checktype = 'single';
+                }
+            }
+        }
+        setAttr(regionWrapper);
+        setAttr(productWrapper);
+
+        // 为target在容器上注册时间委托
+        regionWrapper.onclick = startSet;
+        productWrapper.onclick = startSet; 
+
+    </script>
+</body>
+
+</html>
