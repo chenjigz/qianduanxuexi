@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+</head>
+
+<body>
+    <script>
+
+        // 餐厅类 params={cash:number,seats:number,staff:array} 
+        function Restaurant(params) {
+            this.cash = params.cash;
+            this.seats = params.seats;
+            this.staff = params.staff;
+        }
+        // 招聘职员
+        Restaurant.prototype.hire = function (staff) {
+            console.log('restaurant ' + 'hire ' + staff.name);
+            this.staff.push(staff);
+        }
+        // 解雇职员
+        Restaurant.prototype.fire = function (staff) {
+            var index = this.staff.indexOf(staff);
+            this.staff.splice(index, 1);
+            console.log('restaurant ' + ' fire ' + staff.name);
+        }
+
+        // 职员ID
+        var staffid = 0;
+        // 职员类 params = (name,salary)
+        function Staff(name, salary) {
+            this.name = name;
+            this.salary = salary;
+            this.staffid = ++staffid;
+        }
+        // 完成一次工作
+        Staff.prototype.dojob = function () {
+            console.log('完成一次工作');
+        }
+
+        // 服务员类
+        function Waiter(name, salary) {
+            Staff.call(this, name, salary);
+        }
+        // 服务员工作
+        Waiter.prototype.order = function (customer) {
+            // 顾客点菜菜单
+            var orderMenu;
+            orderMenu = customer.order();
+            var menu = { "customer": customer, "oderMenu": orderMenu };
+            // 返回包含顾客信息的对象
+            return menu ;
+        }
+        Waiter.prototype.tellCook = function (cook, menu) {
+            console.log('waiter ' + this.name + ' tell ' + ' cook ' + cook.name + ' culinary ' +  menu.oderMenu.dishName)
+        }
+        // 上菜
+        Waiter.prototype.serve = function (menu) {
+            console.log('Waiter ' + this.name + ' serves Customer dish ' + menu.oderMenu.dishName);
+        }
+
+
+        function Cook(name, salary) {
+            Staff.call(this, name, salary);
+        }
+        // culinary烹饪
+        Cook.prototype.culinary = function (menu) {
+            console.log('完成一次工作：' + '烹饪出' + menu.orderMenu);
+            this.tellWaiter(waiter, menu);
+        }
+        Cook.prototype.tellWaiter = function (waiter, menu) {
+            console.log('cook ' + this.name + ' tell waiter ' + waiter.name + 'servres customer dish ' + menu.oderMenu.dishName)
+            waiter.serve(menu)
+        }
+        // 顾客类
+        // 顾客id
+        var customerID = 0;
+        function Customer() {
+            this.customerID = ++customerID;
+        }
+        Customer.prototype.order = function () {
+            // 随机返回一个菜名
+            return dishList = dishList[Math.floor(Math.random() * dishList.length)];
+        }
+        Customer.prototype.eat = function(menu) {
+            console.log('customer ' + menu.customer.customerID + ' eat ' + menu.oderMenu.dishName);
+        }
+
+        // 菜品列表
+        var dishList = [];
+        // 菜品类  params:name：菜名，cost:成本，price:价格;
+        function Dishs(name, cost, price) {
+            this.dishName = name;
+            this.cost = cost;
+            this.price = price;
+            // 将自己push入dishList；
+            dishList.push({ 'dishName': this.dishName, 'cost': this.cost, 'price': this.price });
+        }
+
+        // 顾客队列
+        function CustomerQuene() {
+            this.customerQuene = [];
+        }
+        CustomerQuene.prototype.nextCustomer = function () {
+            var customer = new Customer();
+            this.customerQuene.push(customer);
+            return customer
+        }
+
+        var getSingle = function (fn) {
+            var result;
+            return function () {
+                if (!result) {
+                    result = Object.create(fn.prototype);
+                    fn.apply(result, arguments);
+                }
+                return result;
+            };
+        };
+        // 另一种获取单列类的方法
+        // var getSingle = function (fn) {
+        //     var result;
+        //     return function () {
+        //         return result || (result = fn.apply(this, arguments));
+        //     };
+        // };
+
+        // 创建各个单例获取函数
+        var sigleRestaurant = getSingle(Restaurant);
+        var sigleWaiter = getSingle(Waiter);
+        var sigleCook = getSingle(Cook);
+
+        // 生成顾客队列
+        var customerQuene = new CustomerQuene()
+
+        // 生成饭店
+        var ifeRestaurant = sigleRestaurant({
+            cash: 1000000,
+            seats: 20,
+            staff: []
+        });
+
+        // 生成厨师和服务员
+        var newCook = sigleCook("Tony", 10000);
+        var newWaiter = sigleWaiter("John", 10000);
+
+        ifeRestaurant.hire(newCook);
+        ifeRestaurant.hire(newWaiter);
+
+        // 创建菜单
+        var burrito = Dishs('burrito', 2, 8);
+        var taco = Dishs('taco', 1, 5);
+        var sandwish = Dishs('sandwish', 3, 10);
+        var burger = Dishs('burger', 1, 5);
+        
+        // 1.顾客入座
+        var customer =  customerQuene.nextCustomer();
+
+        // 2. 服务员招待顾客点菜,返回顾客信息和菜单
+        var customerOrderInfo = newWaiter.order(customer);
+
+        // 3. 点完菜告诉厨师顾客点菜信息
+        newWaiter.tellCook(newCook, customerOrderInfo);
+
+        // 4. 厨师做好菜后让服务员上菜
+        newCook.tellWaiter(newWaiter,customerOrderInfo)
+
+        // 5. 顾客用餐
+        customer.eat(customerOrderInfo);
+
+        // 6. 换下一位顾客
+        customer =  customerQuene.nextCustomer();
+
+    </script>
+
+
+</body>
+
+</html>
